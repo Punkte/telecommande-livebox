@@ -1,1 +1,1 @@
-export const LIVEBOX_IP = '192.168.1.16'
+export const LIVEBOX_IP = '192.168.1.10'
