@@ -32,7 +32,7 @@ const StyledNumberPad = styled.div`
     font-size: 18px;
 
     &:last-child {
-      grid-column: 2 / 2
+      grid-column: 2 / 2;
     }
   }
 `
@@ -45,7 +45,8 @@ export const NumberPad = () => {
         return (
           <StyledButton
             key={i}
-            onClick={async () => await sendRequest(url)}
+            onClick={async () => {await sendRequest(url); navigator.vibrate(200)}}
+            onTouchStart={() => ({})}
           >
             {number}
           </StyledButton>

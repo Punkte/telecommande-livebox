@@ -27,7 +27,7 @@ const url = getUrl(LIVEBOX_IP, BUTTON_CODE['ON/OFF'])
 export const Header = () => {
   return (
     <HeaderContainer>
-      <StyledButton onClick={async () => await sendRequest(url)}>O</StyledButton>
+      <StyledButton onTouchStart={() => ({})} onClick={async () => await sendRequest(url)}>O</StyledButton>
     </HeaderContainer>
   )
 }

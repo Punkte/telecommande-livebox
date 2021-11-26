@@ -3,6 +3,7 @@ import './assets/App.css'
 import { NumberPad } from './components/NumberPad';
 import { Controls } from './components/Controls';
 import { Header } from './components/Header';
+import { Vod } from './components/Vod';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Header />
       <NumberPad />
       <Controls />
+      <Vod />
     </div>
   );
 }

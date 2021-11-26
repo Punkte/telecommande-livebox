@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { Button } from './Button'
 import { LIVEBOX_IP } from '../utils/constants'
 import { sendRequest, getUrl } from '../utils/helpers'
-import { BUTTON_CODE } from '../utils/commandsMap'
 import netflix from '../assets/netflix.svg'
 
 const StyledButton = styled(Button)`
@@ -11,9 +10,10 @@ const StyledButton = styled(Button)`
   justify-content: center;
   border-radius: 30px;
 
-  padding: 25px;
-  width: 64px;
-  height: 64px;
+  padding: 20px 20px 16px;
+  width: 150px;
+  margin-top: 16px;
+
 `
 
 const FooterContainer = styled.div`
@@ -23,13 +23,23 @@ const FooterContainer = styled.div`
   margin-bottom: 64px;
 `
 
-const url = getUrl(LIVEBOX_IP, 300)
+const url = getUrl(LIVEBOX_IP, 518)
 
 export const Vod = () => {
   return (
     <FooterContainer>
-      <StyledButton onClick={async () => await sendRequest(url)} style={{padding: '16px'}}>
-        <img src={netflix} width="50" alt="vod"/>
+      <StyledButton
+        onClick={async () => {
+          try {
+            await sendRequest(url)
+          } catch(e) {
+            setTimeout(() => sendRequest(url), 300)
+            console.error(e)
+          }
+          }
+        }
+      >
+        <img src={netflix} height="20" alt="vod"/>
       </StyledButton>
     </FooterContainer>
   )
