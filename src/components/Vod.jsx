@@ -36,7 +36,7 @@ export const Vod = () => {
             setTimeout(() => sendRequest(url), 300)
             console.error(e)
           }
-          }
+        }
         }
       >
         <img src={netflix} height="20" alt="vod"/>

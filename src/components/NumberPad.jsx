@@ -4,8 +4,12 @@ import { LIVEBOX_IP } from '../utils/constants'
 import { getUrl, sendRequest } from '../utils/helpers'
 import { Button } from './Button'
 import styled from 'styled-components'
+import disney from '../assets/disney.svg'
+import netflix from '../assets/netflix.svg'
 
-const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'netflix', 0, 'disney']
+
 
 const StyledButton = styled(Button)`
   display: flex;
@@ -30,12 +34,35 @@ const StyledNumberPad = styled.div`
     height: 64px;
 
     font-size: 18px;
-
-    &:last-child {
-      grid-column: 2 / 2;
-    }
   }
 `
+
+const vodClick = async ([number1, number2]) => {
+  try {
+    await sendRequest(number1)
+    setTimeout(() => sendRequest(number2), 300)
+  } catch(e) {
+    setTimeout(() => sendRequest(number2), 300)
+    console.error(e)
+  }
+}
+
+const getUrlsFromNumbers = (array) => array.map(e => getUrl(LIVEBOX_IP, BUTTON_CODE[e]))
+
+const vods = {
+  netflix: getUrlsFromNumbers([6, 6]),
+  disney: getUrlsFromNumbers([6, 8])
+}
+const images = {
+  disney: {
+    img: disney,
+    height: 50
+  },
+  netflix: {
+    img: netflix,
+    height: 25
+  }
+}
 
 export const NumberPad = () => {
   return (
@@ -45,10 +72,22 @@ export const NumberPad = () => {
         return (
           <StyledButton
             key={i}
-            onClick={async () => {await sendRequest(url); navigator.vibrate(200)}}
+            onClick={async () => {
+              if (typeof number === 'string') {
+                await vodClick(vods[number])
+              } else {
+                await sendRequest(url);
+              }
+            }}
             onTouchStart={() => ({})}
           >
-            {number}
+            {typeof number === 'string' ? (
+              <img src={images[number].img} height={images[number].height} alt="vod"/>
+            ) : (
+              <>
+              {number}
+              </>
+            )}
           </StyledButton>
         )
       }) }

@@ -70,7 +70,7 @@ const ButtonGrid = styled.div`
 
 export const Controls = () => {
   return (
-    <div style={{marginTop: '32px'}}>
+    <div style={{marginTop: '32px',}}>
       { controlsButton.map((line, indexLine) => {
         return <ButtonGrid key={indexLine}>
         {
